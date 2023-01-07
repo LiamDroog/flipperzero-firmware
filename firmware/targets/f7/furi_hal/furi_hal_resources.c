@@ -59,7 +59,7 @@ const GpioPin gpio_speaker = {.port = GPIOB, .pin = LL_GPIO_PIN_8};
 
 const GpioPin periph_power = {.port = GPIOA, .pin = LL_GPIO_PIN_3};
 
-const GpioPin gpio_usb_dm = {.port = GPIOA, .pin = LL_GPIO_PIN_11};
+const GpioPin gpio_usb_dn = {.port = GPIOA, .pin = LL_GPIO_PIN_11};
 const GpioPin gpio_usb_dp = {.port = GPIOA, .pin = LL_GPIO_PIN_12};
 
 const InputPin input_pins[] = {
@@ -91,18 +91,18 @@ void furi_hal_resources_init_early() {
     SET_BIT(PWR->CR3, PWR_CR3_APC);
 
     // Hard reset USB
-    furi_hal_gpio_write(&gpio_usb_dm, 1);
+    furi_hal_gpio_write(&gpio_usb_dn, 1);
     furi_hal_gpio_write(&gpio_usb_dp, 1);
-    furi_hal_gpio_init_simple(&gpio_usb_dm, GpioModeOutputOpenDrain);
+    furi_hal_gpio_init_simple(&gpio_usb_dn, GpioModeOutputOpenDrain);
     furi_hal_gpio_init_simple(&gpio_usb_dp, GpioModeOutputOpenDrain);
-    furi_hal_gpio_write(&gpio_usb_dm, 0);
+    furi_hal_gpio_write(&gpio_usb_dn, 0);
     furi_hal_gpio_write(&gpio_usb_dp, 0);
     furi_delay_us(5); // Device Driven disconnect: 2.5us + extra to compensate cables
-    furi_hal_gpio_write(&gpio_usb_dm, 1);
+    furi_hal_gpio_write(&gpio_usb_dn, 1);
     furi_hal_gpio_write(&gpio_usb_dp, 1);
-    furi_hal_gpio_init_simple(&gpio_usb_dm, GpioModeAnalog);
+    furi_hal_gpio_init_simple(&gpio_usb_dn, GpioModeAnalog);
     furi_hal_gpio_init_simple(&gpio_usb_dp, GpioModeAnalog);
-    furi_hal_gpio_write(&gpio_usb_dm, 0);
+    furi_hal_gpio_write(&gpio_usb_dn, 0);
     furi_hal_gpio_write(&gpio_usb_dp, 0);
 
     // External header pins
