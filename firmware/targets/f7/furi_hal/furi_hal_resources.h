@@ -95,7 +95,7 @@ extern const GpioPin gpio_speaker;
 
 extern const GpioPin periph_power;
 
-extern const GpioPin gpio_usb_dm;
+extern const GpioPin gpio_usb_dn;
 extern const GpioPin gpio_usb_dp;
 
 #define BUTTON_BACK_GPIO_Port GPIOC
